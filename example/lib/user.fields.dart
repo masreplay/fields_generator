@@ -6,14 +6,14 @@
 
 part of 'user.dart';
 
-/// [_$UserImpl] fields
-abstract final class _$UserImplFields {
-  const _$UserImplFields._();
+/// [User] fields
+abstract final class UserFields {
+  const UserFields._();
 
-  /// [_$UserImpl.name]
+  /// [User.name]
   static const String nameFieldName = 'name';
 
-  /// [_$UserImpl.age]
+  /// [User.age]
   static const String ageFieldName = 'age';
 
   static const List<String> fieldsNames = [nameFieldName, ageFieldName];
