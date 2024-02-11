@@ -19,14 +19,10 @@ abstract final class _$UserImplFields {
   /// [_$UserImpl.hashCode]
   static const String hashCodeFieldName = 'hashCode';
 
-  /// [_$UserImpl.copyWith]
-  static const String copyWithFieldName = 'copyWith';
-
   static const List<String> fieldsNames = [
     nameFieldName,
     ageFieldName,
-    hashCodeFieldName,
-    copyWithFieldName
+    hashCodeFieldName
   ];
 }
 
@@ -38,5 +34,4 @@ enum _$UserImplFieldsEnum {
   name,
   age,
   hashCode,
-  copyWith,
 }

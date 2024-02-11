@@ -7,8 +7,7 @@ part 'user.g.dart';
 
 @freezed
 class User with _$User {
-  // ignore: invalid_annotation_target
-  @Fields()
+  @fields
   factory User({
     required String name,
     required int age,

@@ -103,7 +103,7 @@ class __$$UserImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@Fields()
+@fields
 class _$UserImpl implements _User {
   _$UserImpl({required this.name, required this.age});
 
