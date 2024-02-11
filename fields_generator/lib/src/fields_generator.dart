@@ -18,6 +18,9 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
       includePrivate: annotation.read('includePrivate').boolValue,
       includeStatic: annotation.read('includeStatic').boolValue,
       type: readEnum(annotation.read('type'), FieldClassType.values),
+      excludeFields: annotation.read('excludeFields').listValue.map((e) {
+        return e.toStringValue()!;
+      }).toList(),
       fieldRename:
           readEnum(annotation.read("fieldRename"), FieldRename.values) ??
               FieldRename.none,
@@ -42,17 +45,22 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
     return code.toString();
   }
 
-  String _generateClassCode(Element element, Fields annotationValue) {
+  List<FieldElement> _includedFields(ClassElement element, Fields annotation) {
+    return element.fields.where(
+      (field) {
+        return !field.isStatic &&
+            (annotation.includePrivate || !field.isPrivate) &&
+            (annotation.includeStatic || !field.isStatic) &&
+            !annotation.excludeFields.contains(field.name);
+      },
+    ).toList();
+  }
+
+  String _generateClassCode(Element element, Fields annotation) {
     final code = StringBuffer();
 
     if (element is ClassElement) {
-      final includedFields = element.fields.where(
-        (field) {
-          return !field.isStatic &&
-              (annotationValue.includePrivate || !field.isPrivate) &&
-              (annotationValue.includeStatic || !field.isStatic);
-        },
-      ).toList();
+      final includedFields = _includedFields(element, annotation);
 
       final String className = element.name;
       final String fieldsClassName = "${className}Fields";
@@ -66,10 +74,7 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
 
       for (final field in includedFields) {
         final name = field.name;
-        final value = encodedFieldName(
-          annotationValue.fieldRename,
-          name,
-        );
+        final value = encodedFieldName(annotation.fieldRename, name);
 
         final String fieldName;
         if (name.startsWith("_")) {
@@ -96,31 +101,25 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
     return code.toString();
   }
 
-  String _generateEnumCode(Element element, Fields annotationValue) {
+  String _generateEnumCode(Element element, Fields annotation) {
     final code = StringBuffer();
 
     if (element is ClassElement) {
-      final includedFields = element.fields.where(
-        (field) {
-          return !field.isStatic &&
-              (annotationValue.includePrivate || !field.isPrivate) &&
-              (annotationValue.includeStatic || !field.isStatic);
-        },
-      ).toList();
+      final includedFields = _includedFields(element, annotation);
 
       final String className = element.name;
       final String fieldsEnumName = "${className}FieldsEnum";
 
       code.writeln('/// [${className}] fields');
       code.writeln('@JsonEnum(');
-      code.writeln('  fieldRename: ${annotationValue.fieldRename},');
+      code.writeln('  fieldRename: ${annotation.fieldRename},');
       code.writeln(')');
       code.writeln('enum $fieldsEnumName {');
 
       for (final field in includedFields) {
         final name = field.name;
         final value = encodedFieldName(
-          annotationValue.fieldRename,
+          annotation.fieldRename,
           name,
         );
 
