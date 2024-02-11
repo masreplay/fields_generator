@@ -1,8 +1,7 @@
 builders:
-  property_fields:
+  fields_generator:
     import: "package:fields_generator/builder.dart"
-    builder_factories: ["fieldsBuilder"]
-    build_extensions: { ".dart": ["fields.g.part"] }
+    builder_factories: ["fieldsLibraryBuilder"]
+    build_extensions: { ".dart": [".info.dart"] }
     auto_apply: dependents
-    build_to: cache
-    applies_builders: ["source_gen|combining_builder"]
+    build_to: source

@@ -7,7 +7,7 @@ import 'package:source_helper/source_helper.dart';
 
 import '../annotations.dart';
 
-class FieldsGenerator extends GeneratorForAnnotation<Fields> {
+class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
   @override
   String generateForAnnotatedElement(
     Element element,
@@ -26,6 +26,9 @@ class FieldsGenerator extends GeneratorForAnnotation<Fields> {
     final type = annotationValue.type;
 
     final code = StringBuffer();
+
+    final fileName = element.library!.source.uri.pathSegments.last.split(".").first;
+    code.writeln("part of '${fileName}.dart';");
 
     if (type == FieldClassType.classType || type == null) {
       code.writeln(_generateClassCode(element, annotationValue));

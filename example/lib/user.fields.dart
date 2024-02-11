@@ -1,10 +1,10 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user.dart';
+// **************************************************************************
+// FieldsLibraryGenerator
+// **************************************************************************
 
-// **************************************************************************
-// FieldsGenerator
-// **************************************************************************
+part of 'user.dart';
 
 /// [User] fields
 abstract final class UserFields {
@@ -31,7 +31,10 @@ abstract final class UserFields {
 }
 
 /// [User] fields
-@JsonEnum(fieldRename: FieldRename.none)
+@JsonEnum(
+  fieldRename: FieldRename.none,
+  alwaysCreate: true,
+)
 enum UserFieldsEnum {
   example,
   _,

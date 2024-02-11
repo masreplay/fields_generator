@@ -1,7 +1,7 @@
 import 'package:fields_generator/annotations.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'user.g.dart';
+part 'user.fields.dart';
 
 @Fields(includePrivate: true)
 class User {
