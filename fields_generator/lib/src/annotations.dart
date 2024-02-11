@@ -19,7 +19,7 @@ class Fields {
     this.fieldRename = FieldRename.none,
     this.includePrivate = false,
     this.includeStatic = false,
-    this.excludeFields = const ["copyWith", "toJson", "fromJson"],
+    this.excludeFields = const ["copyWith", "toJson", "fromJson", "hashCode"],
     this.type,
   });
 }
