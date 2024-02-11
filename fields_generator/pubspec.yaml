@@ -1,5 +1,7 @@
 name: fields_generator
-publish_to: none
+version: 0.0.1
+description: Fields name generator for Dart
+homepage: https://github.com/masreplay/fields_generator
 
 environment:
   sdk: ^3.0.0
