@@ -110,13 +110,13 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
       final className =
           element.name.replaceFirst("_\$", "").replaceFirst("Impl", "");
 
-      final String fieldsEnumName = "${className}FieldsEnum";
+      final String enumName = "${className}FieldsEnum";
 
       code.writeln('/// [${className}] fields');
       code.writeln('@JsonEnum(');
       code.writeln('  fieldRename: ${annotation.fieldRename},');
       code.writeln(')');
-      code.writeln('enum $fieldsEnumName {');
+      code.writeln('enum $enumName {');
 
       for (final (index, field) in includedFields.indexed) {
         final name = field.name;
@@ -129,7 +129,7 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
         }
       }
       code.writeln('  final String value;');
-      code.writeln('  const UserFieldsEnum(this.value);');
+      code.writeln('  const $enumName(this.value);');
 
       code.writeln('}');
     }
