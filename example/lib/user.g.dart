@@ -29,3 +29,12 @@ abstract final class UserFields {
     testerFieldName
   ];
 }
+
+/// [User] fields
+@JsonEnum(fieldRename: FieldRename.none)
+enum UserFieldsEnum {
+  example,
+  _,
+  _test,
+  tester,
+}

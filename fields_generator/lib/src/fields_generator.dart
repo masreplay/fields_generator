@@ -17,12 +17,28 @@ class FieldsGenerator extends GeneratorForAnnotation<Fields> {
     final annotationValue = Fields(
       includePrivate: annotation.read('includePrivate').boolValue,
       includeStatic: annotation.read('includeStatic').boolValue,
-      generateEnum: annotation.read('generateEnum').boolValue,
+      type: readEnum(annotation.read('type'), FieldClassType.values),
       fieldRename:
           readEnum(annotation.read("fieldRename"), FieldRename.values) ??
               FieldRename.none,
     );
 
+    final type = annotationValue.type;
+
+    final code = StringBuffer();
+
+    if (type == FieldClassType.classType || type == null) {
+      code.writeln(_generateClassCode(element, annotationValue));
+    }
+
+    if (type == FieldClassType.enumType || type == null) {
+      code.writeln(_generateEnumCode(element, annotationValue));
+    }
+
+    return code.toString();
+  }
+
+  String _generateClassCode(Element element, Fields annotationValue) {
     final code = StringBuffer();
 
     if (element is ClassElement) {
@@ -65,7 +81,7 @@ class FieldsGenerator extends GeneratorForAnnotation<Fields> {
       }
 
       code.writeln();
-      
+
       code.writeln(
         '  static const List<String> fieldsNames = [${fieldsNames.join(', ')}];',
       );
@@ -73,7 +89,43 @@ class FieldsGenerator extends GeneratorForAnnotation<Fields> {
       code.writeln('}');
     }
 
-    print(code.toString());
+    return code.toString();
+  }
+
+  String _generateEnumCode(Element element, Fields annotationValue) {
+    final code = StringBuffer();
+
+    if (element is ClassElement) {
+      final includedFields = element.fields.where(
+        (field) {
+          return !field.isStatic &&
+              (annotationValue.includePrivate || !field.isPrivate) &&
+              (annotationValue.includeStatic || !field.isStatic);
+        },
+      ).toList();
+
+      final String className = element.name;
+      final String fieldsEnumName = "${className}FieldsEnum";
+
+      code.writeln('/// [${className}] fields');
+      code.writeln('@JsonEnum(');
+      code.writeln('  fieldRename: ${annotationValue.fieldRename},');
+      code.writeln('  alwaysCreate: true,');
+      code.writeln(')');
+      code.writeln('enum $fieldsEnumName {');
+
+      for (final field in includedFields) {
+        final name = field.name;
+        final value = encodedFieldName(
+          annotationValue.fieldRename,
+          name,
+        );
+
+        code.writeln('  $value,');
+      }
+
+      code.writeln('}');
+    }
 
     return code.toString();
   }
@@ -98,3 +150,6 @@ abstract final class UserFields {
 
   static const List<String> fieldsNames = [name, age];
 }
+
+@JsonEnum(fieldRename: FieldRename.snake)
+enum UserFieldsEnum { name, age }
