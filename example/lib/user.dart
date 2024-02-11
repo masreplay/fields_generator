@@ -17,6 +17,4 @@ class User {
   final int _test;
 
   String get tester => '';
-
-  void greeting() {}
 }
