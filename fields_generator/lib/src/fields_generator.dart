@@ -118,6 +118,7 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
       code.writeln('/// [${className}] fields');
       code.writeln('@JsonEnum(');
       code.writeln('  fieldRename: ${annotation.fieldRename},');
+      code.writeln('  valueField: \'value\',');
       code.writeln(')');
       code.writeln('enum $enumName {');
 
