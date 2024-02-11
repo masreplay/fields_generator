@@ -5,3 +5,8 @@ builders:
     build_extensions: { ".dart": [".info.dart"] }
     auto_apply: dependents
     build_to: source
+
+global_options:
+  fields_generator:fields_generator:
+    runs_before:
+      - json_serializable:json_serializable

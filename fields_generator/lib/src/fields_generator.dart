@@ -27,7 +27,8 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
 
     final code = StringBuffer();
 
-    final fileName = element.library!.source.uri.pathSegments.last.split(".").first;
+    final fileName =
+        element.library!.source.uri.pathSegments.last.split(".").first;
     code.writeln("part of '${fileName}.dart';");
 
     if (type == FieldClassType.classType || type == null) {
@@ -113,7 +114,6 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
       code.writeln('/// [${className}] fields');
       code.writeln('@JsonEnum(');
       code.writeln('  fieldRename: ${annotationValue.fieldRename},');
-      code.writeln('  alwaysCreate: true,');
       code.writeln(')');
       code.writeln('enum $fieldsEnumName {');
 
