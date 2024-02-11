@@ -62,7 +62,7 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
     if (element is ClassElement) {
       final includedFields = _includedFields(element, annotation);
 
-      final String className = element.name;
+      final String className = _className(element.name);
       final String fieldsClassName = "${className}Fields";
 
       code.writeln('/// [$className] fields');
@@ -101,14 +101,17 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
     return code.toString();
   }
 
+  String _className(String name) {
+    return name.replaceFirst("_\$", "").replaceFirst("Impl", "");
+  }
+
   String _generateEnumCode(Element element, Fields annotation) {
     final code = StringBuffer();
 
     if (element is ClassElement) {
       final includedFields = _includedFields(element, annotation);
 
-      final className =
-          element.name.replaceFirst("_\$", "").replaceFirst("Impl", "");
+      final className = _className(element.name);
 
       final String enumName = "${className}FieldsEnum";
 
