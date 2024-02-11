@@ -16,14 +16,7 @@ abstract final class _$UserImplFields {
   /// [_$UserImpl.age]
   static const String ageFieldName = 'age';
 
-  /// [_$UserImpl.hashCode]
-  static const String hashCodeFieldName = 'hashCode';
-
-  static const List<String> fieldsNames = [
-    nameFieldName,
-    ageFieldName,
-    hashCodeFieldName
-  ];
+  static const List<String> fieldsNames = [nameFieldName, ageFieldName];
 }
 
 /// [_$UserImpl] fields
@@ -33,5 +26,4 @@ abstract final class _$UserImplFields {
 enum _$UserImplFieldsEnum {
   name,
   age,
-  hashCode,
 }
