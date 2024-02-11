@@ -167,7 +167,7 @@ packages:
       path: "../fields_generator"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.5"
   file:
     dependency: transitive
     description:

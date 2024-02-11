@@ -1,9 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta_meta.dart';
 
 const Fields fields = Fields();
 
-@Target({TargetKind.classType})
 class Fields {
   final FieldRename fieldRename;
 
