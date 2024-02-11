@@ -9,3 +9,6 @@
 
 ## 0.0.4
 - fix enum 
+
+## 0.0.5
+- fix field value 

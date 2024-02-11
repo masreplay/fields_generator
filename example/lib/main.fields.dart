@@ -22,6 +22,7 @@ abstract final class UserFields {
 /// [User] fields
 @JsonEnum(
   fieldRename: FieldRename.none,
+  valueField: 'value',
 )
 enum UserFieldsEnum {
   name('name'),
