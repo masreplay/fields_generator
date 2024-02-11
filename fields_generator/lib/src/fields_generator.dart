@@ -5,7 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:source_helper/source_helper.dart';
 
-import '../annotations.dart';
+import 'annotations.dart';
 
 class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
   @override
