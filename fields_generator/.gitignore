@@ -1,0 +1,20 @@
+# Dart and Flutter specific files
+.dart_tool/
+.packages
+.pub/
+build/
+.idea/
+.vscode/
+
+# Generated files
+.dart_tool/
+.packages
+.pub/
+build/
+
+# Dependency management
+pubspec.lock
+
+# IDE files
+.idea/
+.vscode/
