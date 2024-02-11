@@ -107,7 +107,7 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
     if (element is ClassElement) {
       final includedFields = _includedFields(element, annotation);
 
-      final String className =
+      final className =
           element.name.replaceFirst("_\$", "").replaceFirst("Impl", "");
 
       final String fieldsEnumName = "${className}FieldsEnum";
