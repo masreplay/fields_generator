@@ -12,3 +12,6 @@
 
 ## 0.0.5
 - fix field value 
+
+## 0.1.0
+- remove meta
