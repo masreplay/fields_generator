@@ -19,11 +19,14 @@ abstract final class _$UserImplFields {
   static const List<String> fieldsNames = [nameFieldName, ageFieldName];
 }
 
-/// [_$UserImpl] fields
+/// [User] fields
 @JsonEnum(
   fieldRename: FieldRename.none,
 )
-enum _$UserImplFieldsEnum {
-  name,
-  age,
+enum UserFieldsEnum {
+  name('name'),
+  age('age');
+
+  final String value;
+  const UserFieldsEnum(this.value);
 }

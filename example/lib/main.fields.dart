@@ -24,6 +24,9 @@ abstract final class UserFields {
   fieldRename: FieldRename.none,
 )
 enum UserFieldsEnum {
-  name,
-  age,
+  name('name'),
+  age('age');
+
+  final String value;
+  const UserFieldsEnum(this.value);
 }

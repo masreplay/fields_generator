@@ -107,7 +107,9 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
     if (element is ClassElement) {
       final includedFields = _includedFields(element, annotation);
 
-      final String className = element.name;
+      final String className =
+          element.name.replaceFirst("_\$", "").replaceFirst("Impl", "");
+
       final String fieldsEnumName = "${className}FieldsEnum";
 
       code.writeln('/// [${className}] fields');
@@ -116,15 +118,18 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
       code.writeln(')');
       code.writeln('enum $fieldsEnumName {');
 
-      for (final field in includedFields) {
+      for (final (index, field) in includedFields.indexed) {
         final name = field.name;
-        final value = encodedFieldName(
-          annotation.fieldRename,
-          name,
-        );
+        final value = encodedFieldName(annotation.fieldRename, name);
 
-        code.writeln('  $value,');
+        if (index == includedFields.length - 1) {
+          code.writeln('  $name(\'$value\');');
+        } else {
+          code.writeln('  $name(\'$value\'),');
+        }
       }
+      code.writeln('  final String value;');
+      code.writeln('  const UserFieldsEnum(this.value);');
 
       code.writeln('}');
     }
@@ -153,5 +158,14 @@ abstract final class UserFields {
   static const List<String> fieldsNames = [name, age];
 }
 
-@JsonEnum(fieldRename: FieldRename.snake)
-enum UserFieldsEnum { name, age }
+@JsonEnum(
+  alwaysCreate: true,
+  valueField: 'value',
+)
+enum UserFieldsEnum {
+  name('name'),
+  age('age');
+
+  final String value;
+  const UserFieldsEnum(this.value);
+}
