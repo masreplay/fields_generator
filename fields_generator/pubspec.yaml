@@ -1,4 +1,4 @@
-name: source_gen_example
+name: fields_generator
 publish_to: none
 
 environment:
@@ -13,5 +13,4 @@ dev_dependencies:
   dart_flutter_team_lints: ^2.0.0
 
 dependency_overrides:
-  source_gen:
-    path: ../source_gen
+  source_gen: ^1.5.0
