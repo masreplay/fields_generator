@@ -14,10 +14,10 @@ num answerMultiplied() => answer * 2;
 // PropertyProductGenerator
 // **************************************************************************
 
-num allProduct() => answer * tau;
+num allProduct() => answer * tau * mas;
 
 // **************************************************************************
 // PropertySumGenerator
 // **************************************************************************
 
-num allSum() => answer + tau;
+num allSum() => answer + tau + mas;

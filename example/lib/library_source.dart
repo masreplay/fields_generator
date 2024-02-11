@@ -8,3 +8,5 @@ part 'library_source.g.dart';
 const answer = 42;
 
 const tau = pi * 2;
+
+final mas = 100;

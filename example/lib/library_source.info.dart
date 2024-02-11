@@ -4,5 +4,5 @@
 // MemberCountLibraryGenerator
 // **************************************************************************
 
-// Source library: package:source_gen_example_usage/library_source.dart
-const topLevelNumVarCount = 2;
+// Source library: package:example/library_source.dart
+const topLevelNumVarCount = 3;
