@@ -1,8 +1,9 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+part of 'library_source.dart';
+
 // **************************************************************************
-// MemberCountLibraryGenerator
+// FieldsGenerator
 // **************************************************************************
 
-// Source library: package:example/library_source.dart
-const topLevelNumVarCount = 3;
+const x = 1;

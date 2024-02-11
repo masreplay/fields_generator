@@ -12,14 +12,11 @@ class FieldsGenerator extends GeneratorForAnnotation<Fields> {
     BuildStep buildStep,
   ) {
     final value = Fields(
-      caseStyle: FieldsCodeStyle.values.firstWhere(
-        (e) => e.toString() == annotation.read('caseStyle').stringValue,
-      ),
-      generateEnum: annotation.read('generateEnum').boolValue,
-      includePrivate: annotation.read('includePrivate').boolValue,
-      includeStatic: annotation.read('includeStatic').boolValue,
-    );
+        // generateEnum: annotation.read('generateEnum').boolValue,
+        // includePrivate: annotation.read('includePrivate').boolValue,
+        // includeStatic: annotation.read('includeStatic').boolValue,
+        );
 
-    return 'const x = $value;';
+    return 'const x = 1;';
   }
 }

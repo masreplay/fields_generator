@@ -3,7 +3,6 @@ import 'package:fields_generator/annotations.dart';
 part 'library_source.g.dart';
 
 @Fields(
-  caseStyle: FieldsCodeStyle.snake,
   generateEnum: true,
   includePrivate: true,
   includeStatic: true,
