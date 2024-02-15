@@ -15,3 +15,6 @@
 
 ## 0.1.0
 - remove meta
+
+## 0.1.1
+- fix enum
