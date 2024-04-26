@@ -6,7 +6,7 @@ environment:
 
 dependencies:
   fields_generator:
-    path: ../fields_generator
+    path: ../
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
 

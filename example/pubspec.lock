@@ -164,10 +164,10 @@ packages:
   fields_generator:
     dependency: "direct main"
     description:
-      path: "../fields_generator"
+      path: ".."
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.1.1"
   file:
     dependency: transitive
     description:
