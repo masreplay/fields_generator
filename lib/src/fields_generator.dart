@@ -15,18 +15,23 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
     BuildStep buildStep,
   ) {
     final annotationValue = Fields(
-      includePrivate: annotation.read('includePrivate').boolValue,
-      includeStatic: annotation.read('includeStatic').boolValue,
-      type: readEnum(annotation.read('type'), FieldClassType.values),
+      includePrivate: annotation.read(FieldsNames.includePrivate).boolValue,
+      includeStatic: annotation.read(FieldsNames.includeStatic).boolValue,
+      type: readEnum(
+        annotation.read(FieldsNames.type),
+        FieldClassType.values,
+      ),
       excludeFields: annotation
-          .read('excludeFields')
+          .read(FieldsNames.excludeFields)
           .listValue
           .map((e) => e.toStringValue()!)
           .toList(),
-      fieldRename:
-          readEnum(annotation.read("fieldRename"), FieldRename.values) ??
-              FieldRename.none,
-      suffix: annotation.read('suffix').stringValue,
+      fieldRename: readEnum(
+            annotation.read(FieldsNames.fieldRename),
+            FieldRename.values,
+          ) ??
+          FieldRename.none,
+      suffix: annotation.read(FieldsNames.suffix).stringValue,
     );
 
     final type = annotationValue.type;
@@ -34,7 +39,7 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
     final code = StringBuffer();
 
     final fileName =
-        element.library!.source.uri.pathSegments.last.split(".").first;
+        element.library!.source.uri.pathSegments.last.split('.').first;
     code.writeln("part of '${fileName}.dart';");
 
     if (type == FieldClassType.classType || type == null) {
@@ -66,7 +71,7 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
       final includedFields = _includedFields(element, annotation);
 
       final String className = _className(element.name);
-      final String fieldsClassName = "${className}Fields";
+      final String fieldsClassName = '${className}Fields';
 
       code.writeln('/// [$className] fields');
       code.writeln('abstract final class $fieldsClassName {');
@@ -80,10 +85,10 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
         final value = encodedFieldName(annotation.fieldRename, name);
 
         final String fieldName;
-        if (name.startsWith("_")) {
-          fieldName = "private${name.nonPrivate.pascal}${annotation.suffix}";
+        if (name.startsWith('_')) {
+          fieldName = 'private${name.nonPrivate.pascal}${annotation.suffix}';
         } else {
-          fieldName = "${name}${annotation.suffix}";
+          fieldName = '${name}${annotation.suffix}';
         }
 
         fieldsNames.add(fieldName);
@@ -105,7 +110,7 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
   }
 
   String _className(String name) {
-    return name.replaceFirst("_\$", "").replaceFirst("Impl", "");
+    return name.replaceFirst('_\$', '').replaceFirst('Impl', '');
   }
 
   String _generateEnumCode(Element element, Fields annotation) {
@@ -116,7 +121,7 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
 
       final className = _className(element.name);
 
-      final String enumName = "${className}FieldsEnum";
+      final String enumName = '${className}FieldsEnum';
 
       code.writeln('/// [${className}] fields');
       code.writeln('@JsonEnum(');

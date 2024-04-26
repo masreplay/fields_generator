@@ -9,7 +9,6 @@ environment:
 dependencies:
   build: ^2.4.1
   source_gen: ^1.5.0
-
   analyzer:
 
   json_annotation: ^4.8.1

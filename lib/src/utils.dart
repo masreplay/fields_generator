@@ -3,14 +3,14 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:source_helper/source_helper.dart';
 
-T? readEnum<T extends Enum>(ConstantReader reader, List<T> values) =>
-    reader.isNull
-        ? null
-        : enumValueForDartObject<T>(
-            reader.objectValue,
-            values,
-            (f) => f.name,
-          );
+T? readEnum<T extends Enum>(
+  ConstantReader reader,
+  List<T> values,
+) {
+  return reader.isNull
+      ? null
+      : enumValueForDartObject<T>(reader.objectValue, values, (f) => f.name);
+}
 
 T enumValueForDartObject<T>(
   DartObject source,
