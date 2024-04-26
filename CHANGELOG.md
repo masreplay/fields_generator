@@ -18,3 +18,6 @@
 
 ## 0.1.1
 - fix enum
+
+## 0.1.2
+- add field name prefix
