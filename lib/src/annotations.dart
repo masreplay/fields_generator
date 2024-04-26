@@ -13,11 +13,14 @@ class Fields {
 
   final List<String> excludeFields;
 
+  final String suffix;
+
   const Fields({
     this.fieldRename = FieldRename.none,
     this.includePrivate = false,
     this.includeStatic = false,
     this.excludeFields = const ["copyWith", "toJson", "fromJson", "hashCode"],
+    this.suffix = "",
     this.type,
   });
 }

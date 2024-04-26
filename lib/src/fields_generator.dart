@@ -18,12 +18,15 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
       includePrivate: annotation.read('includePrivate').boolValue,
       includeStatic: annotation.read('includeStatic').boolValue,
       type: readEnum(annotation.read('type'), FieldClassType.values),
-      excludeFields: annotation.read('excludeFields').listValue.map((e) {
-        return e.toStringValue()!;
-      }).toList(),
+      excludeFields: annotation
+          .read('excludeFields')
+          .listValue
+          .map((e) => e.toStringValue()!)
+          .toList(),
       fieldRename:
           readEnum(annotation.read("fieldRename"), FieldRename.values) ??
               FieldRename.none,
+      suffix: annotation.read('suffix').stringValue,
     );
 
     final type = annotationValue.type;
@@ -78,9 +81,9 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
 
         final String fieldName;
         if (name.startsWith("_")) {
-          fieldName = "private${name.nonPrivate.pascal}FieldName";
+          fieldName = "private${name.nonPrivate.pascal}${annotation.suffix}";
         } else {
-          fieldName = "${name}FieldName";
+          fieldName = "${name}${annotation.suffix}";
         }
 
         fieldsNames.add(fieldName);
