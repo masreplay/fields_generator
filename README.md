@@ -3,6 +3,11 @@
 This package provides a Dart and Flutter field name code generation for class.
 
 
+# Used for
+- Firebase query field name
+- Supabase query field name 
+
+
 ## Usage
 
 ```dart
@@ -11,7 +16,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'main.fields.dart';
 
-@Fields()
+@fields()
 class User {
   User({
     required this.name,
@@ -20,6 +25,12 @@ class User {
 
   final String name;
   final int age;
+}
+
+
+void main(List<String> args) {
+  print(UserFields.nameFieldName); // output: name
+  print(UserFields.ageFieldName); // output: age
 }
 ```
 
@@ -54,6 +65,28 @@ abstract final class UserFields {
 enum UserFieldsEnum {
   name,
   age,
+}
+```
+
+## Working with freezed
+```dart
+import 'package:fields_generator/fields_generator.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'main.fields.dart';
+part 'main.freezed.dart';
+part 'main.g.dart';
+
+@freezed
+class User with _$User {
+  @fields
+  @JsonSerializable()
+  factory User({
+    required String name,
+    required int age,
+  }) = _User;
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
 ```
 

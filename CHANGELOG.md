@@ -21,3 +21,6 @@
 
 ## 0.1.2
 - add field name prefix
+
+## 0.1.3
+- fix docs and analysis
