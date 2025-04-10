@@ -17,16 +17,15 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
     final annotationValue = Fields(
       includePrivate: annotation.read(FieldsNames.includePrivate).boolValue,
       includeStatic: annotation.read(FieldsNames.includeStatic).boolValue,
-      type: readEnum(
-        annotation.read(FieldsNames.type),
-        FieldClassType.values,
-      ),
-      excludeFields: annotation
-          .read(FieldsNames.excludeFields)
-          .listValue
-          .map((e) => e.toStringValue()!)
-          .toList(),
-      fieldRename: readEnum(
+      type: readEnum(annotation.read(FieldsNames.type), FieldClassType.values),
+      excludeFields:
+          annotation
+              .read(FieldsNames.excludeFields)
+              .listValue
+              .map((e) => e.toStringValue()!)
+              .toList(),
+      fieldRename:
+          readEnum(
             annotation.read(FieldsNames.fieldRename),
             FieldRename.values,
           ) ??
@@ -54,14 +53,12 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
   }
 
   List<FieldElement> _includedFields(ClassElement element, Fields annotation) {
-    return element.fields.where(
-      (field) {
-        return !field.isStatic &&
-            (annotation.includePrivate || !field.isPrivate) &&
-            (annotation.includeStatic || !field.isStatic) &&
-            !annotation.excludeFields.contains(field.name);
-      },
-    ).toList();
+    return element.fields.where((field) {
+      return !field.isStatic &&
+          (annotation.includePrivate || !field.isPrivate) &&
+          (annotation.includeStatic || !field.isStatic) &&
+          !annotation.excludeFields.contains(field.name);
+    }).toList();
   }
 
   String _generateClassCode(Element element, Fields annotation) {
@@ -110,7 +107,10 @@ class FieldsLibraryGenerator extends GeneratorForAnnotation<Fields> {
   }
 
   String _className(String name) {
-    return name.replaceFirst('_\$', '').replaceFirst('Impl', '');
+    return name
+        .replaceFirst('_\$', '')
+        .replaceFirst('_', '')
+        .replaceFirst('Impl', '');
   }
 
   String _generateEnumCode(Element element, Fields annotation) {
@@ -170,10 +170,7 @@ abstract final class UserFields {
   static const List<String> fieldsNames = [name, age];
 }
 
-@JsonEnum(
-  alwaysCreate: true,
-  valueField: 'value',
-)
+@JsonEnum(alwaysCreate: true, valueField: 'value')
 enum UserFieldsEnum {
   name('name'),
   age('age');
